@@ -1,5 +1,6 @@
 # Description
-This is package devloped by Mowito company. it is aimed at making robot follow command given at real time.<br/> 
+This is package devloped by Mowito company. 
+<br/>It is aimed at making robot follow command given at real time.<br/> 
 Controller : Maxl (devloped at Mowito)<br/>
 planner : NavfnPlanner (devloped at Mowito)
 ### input
