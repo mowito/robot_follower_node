@@ -1,6 +1,14 @@
+/**
+* @file : robot_follower_node.cpp
+@brief: robot will follow given goal at runtime
+@author: neha marne nehamarne27@gmail.com 
+@date: 4/04/2021
+@company: Mowito
+**/
+
 #include <mw_maxl_planner/mw_maxl_planner_ros1.h>
 
-class DOL
+class RobotFollower
 {
 
     const double POS_EPS = 0.001;
@@ -28,7 +36,7 @@ class DOL
 public:
     boost::shared_ptr<mw_maxl_planner::MwMaxlPlanner> mw_maxl;
 
-    DOL(double goalXYTolerance, std::string map_frame, std::string robot_frame, bool rel_motion_mode)
+    RobotFollower(double goalXYTolerance, std::string map_frame, std::string robot_frame, bool rel_motion_mode)
     :goalXYTolerance_(goalXYTolerance),
      map_frame_(map_frame),
      robot_frame_(robot_frame),
@@ -39,7 +47,7 @@ public:
         mw_maxl->initialize("mw_maxl_planner", tf2Buf_);
         while (!mw_maxl->isInitialized())
         {
-            ROS_INFO_THROTTLE(1, "[MAXL][Dol Node]: waiting for maxl to initalise");
+            ROS_INFO_THROTTLE(1, "[MAXL][robot_follower Node]: waiting for maxl to initalise");
         }
 
         initialized_ = true;
@@ -59,7 +67,7 @@ public:
             }
             catch(tf2::TransformException &ex)
             {
-              ROS_WARN("[MAXL] [Dol Node]: Exception while transforming %s frame to %s frame. Error message: %s",robot_pose_in.header.frame_id.c_str(), map_frame_.c_str(), ex.what());
+              ROS_WARN("[MAXL] [robot_follower Node]: Exception while transforming %s frame to %s frame. Error message: %s",robot_pose_in.header.frame_id.c_str(), map_frame_.c_str(), ex.what());
             }
             if(!first_goal_recieved_)
             {
@@ -92,7 +100,7 @@ public:
             }
             catch(tf2::TransformException &ex)
             {
-              ROS_WARN("[MAXL] [Dol Node]: Exception while transforming %s frame to %s frame. Error message: %s",robot_pose_in.header.frame_id.c_str(), robot_frame_.c_str(), ex.what());
+              ROS_WARN("[MAXL] [robot_follower Node]: Exception while transforming %s frame to %s frame. Error message: %s",robot_pose_in.header.frame_id.c_str(), robot_frame_.c_str(), ex.what());
             }
             if(!first_goal_recieved_)
             {
@@ -130,7 +138,7 @@ public:
 };
 
 int main(int argc, char **argv) {
-    ros::init(argc, argv, "maxl_dol_node");
+    ros::init(argc, argv, "robot_follower_node");
     ros::NodeHandle private_nh("~");
     ros::NodeHandle global_nh("/");
 
@@ -152,21 +160,21 @@ int main(int argc, char **argv) {
     private_nh.param<std::string>("map_frame", map_frame, "map");
     private_nh.param("rel_motion_mode", rel_motion_mode, false);
 
-    boost::shared_ptr<DOL> dol(new DOL(goalXYTolerance, map_frame, robot_frame, rel_motion_mode));
+    boost::shared_ptr<RobotFollower> robot_follower(new RobotFollower(goalXYTolerance, map_frame, robot_frame, rel_motion_mode));
 
-    ros::Subscriber mobileGoalSub = global_nh.subscribe(mobileGoalTopic, 1, &DOL::goalCB, dol);
+    ros::Subscriber mobileGoalSub = global_nh.subscribe(mobileGoalTopic, 1, &RobotFollower::goalCB, robot_follower);
     geometry_msgs::TwistStamped cmd_vel;
     ros::Rate loopRate(loopRateValue);
 
-    while (ros::ok() && dol->isInitialized()) {
+    while (ros::ok() && robot_follower->isInitialized()) {
         
         if(rel_motion_mode == false)
         {
-            //angle tolerance does not have any effect in DoL mode.
-            if (!dol->isGoalReached()) {
-                 ROS_INFO_THROTTLE(5, "[MAXL][DoL Node]: Goal Not Reached Yet");
+            //angle tolerance does not have any effect in robot_follower mode.
+            if (!robot_follower->isGoalReached()) {
+                 ROS_INFO_THROTTLE(5, "[MAXL][robot_follower Node]: Goal Not Reached Yet");
                  //get command velocity
-                 dol->mw_maxl->computeVelocityForGoal(cmd_vel);
+                 robot_follower->mw_maxl->computeVelocityForGoal(cmd_vel);
                  cmd_vel_pub.publish(cmd_vel.twist);
 
             }
@@ -175,14 +183,14 @@ int main(int argc, char **argv) {
                 // publish zero command velocity
                 geometry_msgs::TwistStamped zero_cmd_vel;
                 cmd_vel_pub.publish(zero_cmd_vel.twist);
-                ROS_INFO_THROTTLE(5, "[MAXL][DoL Node]: Goal Reached");
+                ROS_INFO_THROTTLE(5, "[MAXL][robot_follower Node]: Goal Reached");
             }
         }
         else
         {
-            if (!dol->isGoalReached()) {
-                 ROS_INFO_THROTTLE(5, "[MAXL][DoL Node]: Goal Not Reached Yet");
-                 dol->mw_maxl->computeVelocityForGoal(cmd_vel);
+            if (!robot_follower->isGoalReached()) {
+                 ROS_INFO_THROTTLE(5, "[MAXL][robot_follower Node]: Goal Not Reached Yet");
+                 robot_follower->mw_maxl->computeVelocityForGoal(cmd_vel);
                  cmd_vel_pub.publish(cmd_vel.twist);
             }
             else
@@ -190,7 +198,7 @@ int main(int argc, char **argv) {
                 // publish zero command velocity
                 geometry_msgs::TwistStamped zero_cmd_vel;
                 cmd_vel_pub.publish(zero_cmd_vel.twist);
-                ROS_INFO_THROTTLE(5, "[MAXL][DoL Node]: Goal Reached");
+                ROS_INFO_THROTTLE(5, "[MAXL][robot_follower Node]: Goal Reached");
             }            
         }
         ros::spinOnce();

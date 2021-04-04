@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
-<!-- launches DOL node only -->
+<!-- launches robot_follower node only -->
 <launch>
 
-    <!--dol Params-->
+    <!--robot_follower Params-->
     <arg name="mobileGoalTopic" default="/move_base_simple/goal"/> 
     <arg name="loop_rate_value" default="10"/>
     <arg name="goal_dist_tolerance" default = "0.1"/> <!-- in meters -->
     <arg name="rel_motion_mode" default = "false"/>
     <arg name="map_frame" default="map"/>
     <arg name="robot_frame" default="base_link"/>
-    <arg name="dol_params" default="$(find mw_maxl_planner)/config/dol_config"/>
+    <arg name="robot_follower_params" default="$(find robot_follower)/config/robot_follower_config"/>
 
-    <!-- =============== DOL =============== -->
-    <node pkg="mw_maxl_planner" name="mw_maxl_dol_node" type="mw_maxl_dol_node" output="screen">
-        <rosparam command="load" file="$(arg dol_params)/mw_maxl_planner.yaml" subst_value="true"/>
+    <!-- =============== robot_follower =============== -->
+    <node pkg="robot_follower" name="robot_follower_node" type="robot_follower_node" output="screen">
+        <rosparam command="load" file="$(arg robot_follower_params)/mw_maxl_planner.yaml" subst_value="true"/>
         <param name="mobileGoalTopic" value="$(arg mobileGoalTopic)"/>
         <param name="dist_tolerance" value="$(arg goal_dist_tolerance)"/> 
         <param name="loop_rate_value" value="$(arg loop_rate_value)"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- launches DOL node along with tracker_sim launch file containing tracker_sim node and keyboard_teleop node -->
+<!-- launches robot_follower node along with tracker_sim launch file containing tracker_sim node and keyboard_teleop node -->
 <launch>
     <!--Tracker sim params-->
     <arg name="loop_rate_value" default="10"/> <!-- To control the rate at which the tracker node will publish its goals -->
@@ -7,8 +7,8 @@
     <arg name="teleop_sub_topic" default="/tracker/cmd_vel"/> <!--The topic name at which the tracker_sim_node subscribes to the trakcer velocities published by the keyboard_teleop node -->  
     <arg name="tracker_pose_topic" default="/move_base_simple/goal"/> <!--The topic name at which the tracker_sim_node publishes its goals -->
 
-    <!--dol Params-->
-    <arg name="dol_params" default="$(find robot_follower)/config/dol_config"/>
+    <!--robot_follower Params-->
+    <arg name="robot_follower_params" default="$(find robot_follower)/config/robot_follower_config"/>
 
     <arg name="goal_dist_tolerance" default = "0.1"/> <!-- in meters -->
     <arg name="rel_motion_mode" default = "true"/>
@@ -17,10 +17,10 @@
     <arg name="robot_frame" default="base_link"/>
 
 
-    <!--DOL-->
+    <!--robot_follower-->
     
-    <include file="$(find robot_follower)/launch/maxl_DOL.launch">
-        <arg name="dol_params" value="$(arg dol_params)"/>
+    <include file="$(find robot_follower)/launch/robot_follower.launch">
+        <arg name="robot_follower_params" value="$(arg robot_follower_params)"/>
         <arg name="mobileGoalTopic" value="$(arg tracker_pose_topic)"/>
         <arg name="goal_dist_tolerance" value="$(arg goal_dist_tolerance)"/> 
         <arg name="loop_rate_value" value="$(arg loop_rate_value)"/>
