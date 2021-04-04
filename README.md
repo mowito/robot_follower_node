@@ -7,6 +7,4 @@ Keyboard innput can be given at run time
 robot will update path taking obstacle avoidance in account as goal is changed by keys i , l j to move it forword backword rigth left 
 
 # Result
-<p float="left">
-  <img src="Videos/out.gif" width="300" />
-</p>
+![out](https://user-images.githubusercontent.com/51331480/113501537-83b5a880-9543-11eb-8aba-99b28ba33679.gif)
