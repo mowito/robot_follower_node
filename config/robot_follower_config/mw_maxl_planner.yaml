@@ -1,0 +1,81 @@
+mw_maxl_planner:
+  use_laser: true
+  odomTopic: "/odom"
+  plot_path: true
+
+  # path to motion primitive files. checkout out mw_maxl_planner/paths for more of them
+  pathFolder: $(find mw_maxl_planner)/paths/rosbot_mprim_1_02
+
+  autonomyMode: true
+  map_frame: "map"
+  robot_frame: "base_link"
+  velodyne_frame: "velodyne"
+  laser_frame: "laser"
+
+
+  lookahead_goal_on_path: true
+  min_lookahead: 0.7 # 0.7 # 0.2 #1.5
+  max_lookahead: 1.5 # 0.7 # 1.5 # 3
+  closest_point_index_search: 10
+  max_y_deviation: 1.0
+  min_radius: 0.1
+  max_radius: 1.0
+  max_omega_radius: 1.0
+  max_path_dev: 1.0
+  lookahead_point_distance: 0.1
+
+  # vehicle dimension for ROSbot
+  vehicleLength: 0.23
+  vehicleWidth: 0.2
+
+  sensorOffsetX: 0.1    # not having effect
+  sensorOffsetY: 0      # not having effect
+
+  maxSpeed: 0.3 # 0.6 # 0.4
+  maxAccel: 10.0 #0.5 # 1.0 #0.5
+
+  yaw_gain: 2.5       # yaw gain used when robot is in motion
+  stop_yaw_gain: 0.6  # yaw gain used when robot is stopped/almost stopped
+  max_yaw_rate: 2.5 #0.5   # maximum yaw rate for the robot
+
+  direction_weight: 0.2 # 0.02        # weight to change in direction
+  direction_threshold: 90 # 120      # in degrees
+
+  #scoring params
+  in_place_rotation_penalty: 0.05 #higher value penalises in place rotation more
+  goal_direction_preference: 0.2 #higher value means controller prefers paths oriented towards the goal
+
+  # for obstacle inflation
+  x_inflate: 0 #0.16 # +- x_inflate /2 meters in x-direction of path frame
+  y_inflate: 0 #0.80 #+- y_inflate / 2 meters in y-direction of path frame
+
+  #enable visualisation of detailed data (pointcloud data)
+  vis_pointcloud: true
+
+  # the obstacle horizon -
+  # use it based on the rooms you are operating in
+  # obstacle_horizon should be more than min path range
+  obstacle_horizon: 1.5 # 0.7 #1 # 3.5
+  min_path_range: 0.3 # 1
+
+
+  # scales the paths and distances. low pathScale means path elongation and vice-versa.
+
+  initial_path_scale: 1.0 # 1.0
+  min_path_scale: 0.10 # 0.75
+  path_scale_step: 0.1 #0.25
+
+  reverse_enabled: false #parameter to enable/disable two way drive
+
+  scoring_algo_index: 4 #index of the scoring function to be used
+
+  pi_osc_senstivity: 5 #to control the senstivity of oscillation detection. If this value is high, even small jumps in chosen path will 
+                               #be considered an oscillation
+  pi_osc_threshold: 10 #Everytime an oscillation is detected, a count is increased, if this count goes 
+                               #above this threshold, oscillations are considered true and not just an error in detection
+  osc_det_by_path_index: false #if true, oscillations will be detected by checking jumps in path scoring algo
+
+  av_osc_sample_window: 1.0 #time period/window over which frequency of oscillation is calculated
+  av_osc_freq_threshold: 2.0 #if the frequency of change in oscillation magnitude per av_osc_sample_window is more than this value, it is considered an oscillation 
+  osc_det_by_angular_velocity: true #if true, oscillations will be detected by checking the frequency of change in ang_vel direction
+  
