@@ -23,6 +23,7 @@ After building and sourcing the repo on terminal type follwing commands
 1. ```roslaunch rosbot_description rosbot_nav_with_map.launch <br/>```
 2. ```roslaunch robot_follower maxl_robot_follower_with_tracker_sim.launch <br/>```
 3. On same terminal as launching ```robot_follower``` give commands as given in "input" section above to move robot <br/>
+4. You will see result as below
 
 # Result
 ![out](https://user-images.githubusercontent.com/51331480/113501537-83b5a880-9543-11eb-8aba-99b28ba33679.gif)
