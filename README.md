@@ -2,11 +2,11 @@
 This is package devloped by Mowito company. <br/>
 It is aimed at making robot follow command given at real time.<br/> 
 Uses local planner which is used for short range path planning (like 3-4m)<br/>
-Controller : Maxl (devloped at Mowito)<br/>
-planner : MaxlPlanner (devloped at Mowito)<br/>
-For further information on Mowito navigation stack refer to the [link](https://mowito-navstack.readthedocs.io/en/latest/Introduction.html)<br/>
-By tuning parameters for Maxl you can deploy navigation stack on your robot. For tunning parameters refer to this [link](https://mowito-navstack.readthedocs.io/en/latest/tune_maxl.html)<br/>
-Instruction guide for running navigation stack on actual robot can be found [here](https://mowito-navstack.readthedocs.io/en/latest/rosbot_real.html)
+    * Controller : Maxl (devloped at Mowito)<br/>
+    * planner : MaxlPlanner (devloped at Mowito)<br/>
+* For further information on Mowito navigation stack refer to the [link](https://mowito-navstack.readthedocs.io/en/latest/Introduction.html)<br/>
+* By tuning parameters for Maxl you can deploy navigation stack on your robot. For tunning parameters refer to this [link](https://mowito-navstack.readthedocs.io/en/latest/tune_maxl.html)<br/>
+* Instruction guide for running navigation stack on actual robot can be found [here](https://mowito-navstack.readthedocs.io/en/latest/rosbot_real.html)
 
 ### Input
 Keyboard innput can be given at run time<br/> 
@@ -14,15 +14,15 @@ robot will update path taking obstacle avoidance in account as goal is changed b
 
 # How to launch
 ### System requirement
-Ubuntu 18/20<br/>
-ROS Melodic/Neotic (ROS1)<br/>
-Rviz (present by default if not refer to the [link](http://wiki.ros.org/rviz/UserGuide))<br/>
+* Ubuntu 18/20<br/>
+* ROS Melodic/Neotic (ROS1)<br/>
+* Rviz (present by default if not refer to the [link](http://wiki.ros.org/rviz/UserGuide))<br/>
 
 #### Repository requirement
-For running the simulation you must have mw_maxl_planner repository installed.<br/>
-Information regarding how to use navigation stack can be found here on [link](https://mowito-navstack.readthedocs.io/en/latest/how_to_use_mowito.html)<br/>
-For installing Maxl planner refer to the [link](https://mowito-navstack.readthedocs.io/en/latest/Installation.html)
-Information regarding parameters used in Maxl Planner is on [link](https://mowito-navstack.readthedocs.io/en/latest/config_maxl.html)
+* For running the simulation you must have mw_maxl_planner repository installed.<br/>
+* Information regarding how to use navigation stack can be found here on [link](https://mowito-navstack.readthedocs.io/en/latest/how_to_use_mowito.html)<br/>
+* For installing Maxl planner refer to the [link](https://mowito-navstack.readthedocs.io/en/latest/Installation.html)
+* Information regarding parameters used in Maxl Planner is on [link](https://mowito-navstack.readthedocs.io/en/latest/config_maxl.html)
 ### Launch simulation
 After building and sourcing the repo on terminal type follwing commands 
 1. ```roslaunch rosbot_description rosbot_nav_with_map.launch ```
