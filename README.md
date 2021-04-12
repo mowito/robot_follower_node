@@ -1,12 +1,12 @@
 # Description
 This is package devloped by Mowito company. <br/>
 It is aimed at making robot follow command given at real time.<br/> 
-Uses local planner which is used for short range path planning (like 3-4m)<br/>
-    * Controller : Maxl (devloped at Mowito)<br/>
-    * planner : MaxlPlanner (devloped at Mowito)<br/>
 * For further information on Mowito navigation stack refer to the [link](https://mowito-navstack.readthedocs.io/en/latest/Introduction.html)<br/>
 * By tuning parameters for Maxl you can deploy navigation stack on your robot. For tunning parameters refer to this [link](https://mowito-navstack.readthedocs.io/en/latest/tune_maxl.html)<br/>
-* Instruction guide for running navigation stack on actual robot can be found [here](https://mowito-navstack.readthedocs.io/en/latest/rosbot_real.html)
+* Instruction guide for running navigation stack on actual robot can be found [here](https://mowito-navstack.readthedocs.io/en/latest/rosbot_real.html)<br/>
+* It Uses local planner which is used for short range path planning (3-4m)<br/>
+    * Planner : MaxlPlanner (devloped at Mowito)<br/>
+    * Controller : Maxl (devloped at Mowito)<br/>
 
 ### Input
 Keyboard innput can be given at run time<br/> 
