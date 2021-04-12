@@ -19,8 +19,8 @@ For running the simulation you must have mw_maxl_planner installed which is ment
 For installing Maxl planner refer to the [link](https://mowito-navstack.readthedocs.io/en/latest/Installation.html)
 ### Launch simulation
 After building and sourcing the repo on terminal type follwing commands 
-1. ```roslaunch rosbot_description rosbot_nav_with_map.launch ``
-2. ```roslaunch robot_follower maxl_robot_follower_with_tracker_sim.launch ``
+1. ```roslaunch rosbot_description rosbot_nav_with_map.launch ```
+2. ```roslaunch robot_follower maxl_robot_follower_with_tracker_sim.launch ```
 3. On same terminal as launching ```robot_follower``` give commands as given in "input" section above to move robot <br/>
 4. You will see result as below
 
